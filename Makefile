@@ -967,9 +967,8 @@ LDFLAGS_BUILD_ID = $(patsubst -Wl$(comma)%,%,\
 KBUILD_LDFLAGS_MODULE += $(LDFLAGS_BUILD_ID)
 LDFLAGS_vmlinux += $(LDFLAGS_BUILD_ID)
 
-ifdef CONFIG_LD_DEAD_CODE_DATA_ELIMINATION
-LDFLAGS_vmlinux	+= $(call ld-option, --gc-sections,)
-endif
+LDFLAGS	+= -z noexecstack
+LDFLAGS	+= $(call ld-option,--no-warn-rwx-segments)
 
 ifeq ($(CONFIG_STRIP_ASM_SYMS),y)
 LDFLAGS_vmlinux	+= $(call ld-option, -X,)
